@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Age Calculator</h1>
+    </header>
+    
+    <main>
+        <h2>Enter Your Birth Date</h2>
+        <input type="date" id="birthdate">
+        <button id="calculate">Calculate Age</button>
+        <div id="result"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 All rights reserved to Storka</p>
+        <p class="small-text">(Mark Johnson)</p>
+    </footer>
+
+    <script>
+        document.getElementById('calculate').addEventListener('click', function() {
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const today = new Date();
+            const ageInMilliseconds = today - birthdate;
+            const ageInSeconds = ageInMilliseconds / 1000;
+            const ageInMinutes = ageInSeconds / 60;
+            const ageInHours = ageInMinutes / 60;
+            const ageInDays = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24));
+            const ageInYears = today.getFullYear() - birthdate.getFullYear();
+            
+            if (today < new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate())) {
+                ageInYears--;
+            }
+
+            document.getElementById('result').innerHTML = `
+                <h3>Your Age</h3>
+                <p>Years: ${ageInYears}</p>
+                <p>Days: ${ageInDays}</p>
+                <p>Hours: ${Math.floor(ageInHours)}</p>
+                <p>Minutes: ${Math.floor(ageInMinutes)}</p>
+                <p>Seconds: ${Math.floor(ageInSeconds)}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
